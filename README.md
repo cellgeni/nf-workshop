@@ -181,3 +181,17 @@ beforeScript "set +u; source activate rnaseq"
 afterScript "set +u; source deactivate"
 ```
 
+> We do not recommend to add any R-related packages to your conda environment, in out experience it never worked well.
+
+### Docker images
+
+You conda environments can be further dockerized if needed using:
+```
+FROM continuumio/miniconda
+ADD environment.yml
+RUN conda env create -f environment.yml
+```
+
+You can then add any other softwared you need for your pipeline to the docker image.
+
+## SC3 clustering Nextflow pipeline
