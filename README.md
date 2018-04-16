@@ -35,3 +35,47 @@ HELLO
 HELLO
 WORLD!
 ```
+
+## work directory
+```
+> tree -a work
+work
+├── 66
+│   └── 5422cf0adc07c4662eaaa04b5c1700
+│       ├── .command.begin
+│       ├── .command.err
+│       ├── .command.log
+│       ├── .command.out
+│       ├── .command.run
+│       ├── .command.sh
+│       ├── .exitcode
+│       ├── chunk_aa
+│       └── chunk_ab
+├── 7b
+│   └── 86f99a5e06fe183daee815b2cf09c7
+│       ├── .command.begin
+│       ├── .command.err
+│       ├── .command.log
+│       ├── .command.out
+│       ├── .command.run
+│       ├── .command.sh
+│       ├── .exitcode
+│       └── chunk_aa -> /Users/vk6/nf-workshop/work/66/5422cf0adc07c4662eaaa04b5c1700/chunk_aa
+└── f5
+    └── 56dcd57618fe720c4ed4602055f68a
+        ├── .command.begin
+        ├── .command.err
+        ├── .command.log
+        ├── .command.out
+        ├── .command.run
+        ├── .command.sh
+        ├── .exitcode
+        └── chunk_ab -> /Users/vk6/nf-workshop/work/66/5422cf0adc07c4662eaaa04b5c1700/chunk_ab
+
+6 directories, 25 files
+```
+
+* `work` directory contains sub-directories where Nextflow executes it’s processes
+* The names of the directories are randomly generated
+* splitLetters was executed in the `66` sub-directory
+* convertToUpper was executed in `7b` and `f5` sub-directories
