@@ -116,3 +116,21 @@ olleH
 ```
 
 Note that the first process `splitLetters` was cached and was not run at all!
+## Pipeline parameters
+Nextflow allows to define parameters inside the pipeline, e.g. in the [Hello, world!](hello-world.nf) pipeline there is a `str` parameter defined:
+```
+params.str = 'Hello world!'
+```
+
+We can use it in the command line to redefine the default value:
+```
+> nextflow run hello-world.nf --str 'Hola mundo'
+N E X T F L O W  ~  version 0.27.4
+Launching `hello-world.nf` [elated_hamilton] - revision: b0857ec305
+[warm up] executor > local
+[b3/924952] Submitted process > splitLetters
+[d8/727942] Submitted process > convertToUpper (2)
+[5a/3b7252] Submitted process > convertToUpper (1)
+odnu
+m aloH
+```
