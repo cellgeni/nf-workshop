@@ -1,54 +1,52 @@
-Apr-16 14:16:00.627 [main] DEBUG nextflow.cli.Launcher - $> /Users/vk6/bin/nextflow run hello-world.nf
-Apr-16 14:16:00.714 [main] INFO  nextflow.cli.CmdRun - N E X T F L O W  ~  version 0.27.4
-Apr-16 14:16:00.734 [main] INFO  nextflow.cli.CmdRun - Launching `hello-world.nf` [ridiculous_gautier] - revision: fdfb4f81a0
-Apr-16 14:16:01.045 [main] DEBUG nextflow.Session - Session uuid: 419b1b0a-1ded-4b81-aefc-654d26679a31
-Apr-16 14:16:01.045 [main] DEBUG nextflow.Session - Run name: ridiculous_gautier
-Apr-16 14:16:01.047 [main] DEBUG nextflow.Session - Executor pool size: 8
-Apr-16 14:16:01.122 [main] DEBUG nextflow.cli.CmdRun - 
+Apr-16 14:44:29.618 [main] DEBUG nextflow.cli.Launcher - $> /Users/vk6/bin/nextflow run hello-world.nf -resume
+Apr-16 14:44:29.717 [main] INFO  nextflow.cli.CmdRun - N E X T F L O W  ~  version 0.27.4
+Apr-16 14:44:29.737 [main] INFO  nextflow.cli.CmdRun - Launching `hello-world.nf` [mighty_goldstine] - revision: 0fa0fd8326
+Apr-16 14:44:30.043 [main] DEBUG nextflow.Session - Session uuid: 419b1b0a-1ded-4b81-aefc-654d26679a31
+Apr-16 14:44:30.043 [main] DEBUG nextflow.Session - Run name: mighty_goldstine
+Apr-16 14:44:30.046 [main] DEBUG nextflow.Session - Executor pool size: 8
+Apr-16 14:44:30.126 [main] DEBUG nextflow.cli.CmdRun - 
   Version: 0.27.4 build 4771
   Modified: 05-02-2018 09:51 UTC (09:51 BST)
   System: Mac OS X 10.13.3
   Runtime: Groovy 2.4.13 on Java HotSpot(TM) 64-Bit Server VM 9.0.4+11
   Encoding: UTF-8 (UTF-8)
-  Process: 33573@mib112002i.internal.sanger.ac.uk [172.30.16.88]
-  CPUs: 8 - Mem: 16 GB (24.1 MB) - Swap: 3 GB (520.5 MB)
-Apr-16 14:16:01.132 [main] DEBUG nextflow.Session - Work-dir: /Users/vk6/Google Drive/work/cellgeni/nf-workshop/work [Mac OS X]
-Apr-16 14:16:01.132 [main] DEBUG nextflow.Session - Script base path does not exist or is not a directory: /Users/vk6/Google Drive/work/cellgeni/nf-workshop/bin
-Apr-16 14:16:01.258 [main] DEBUG nextflow.Session - Session start invoked
-Apr-16 14:16:01.264 [main] DEBUG nextflow.processor.TaskDispatcher - Dispatcher > start
-Apr-16 14:16:01.265 [main] DEBUG nextflow.script.ScriptRunner - > Script parsing
-Apr-16 14:16:01.383 [main] DEBUG nextflow.script.ScriptRunner - > Launching execution
-Apr-16 14:16:01.446 [main] DEBUG nextflow.processor.ProcessFactory - << taskConfig executor: null
-Apr-16 14:16:01.446 [main] DEBUG nextflow.processor.ProcessFactory - >> processorType: 'local'
-Apr-16 14:16:01.452 [main] DEBUG nextflow.executor.Executor - Initializing executor: local
-Apr-16 14:16:01.455 [main] INFO  nextflow.executor.Executor - [warm up] executor > local
-Apr-16 14:16:01.462 [main] DEBUG n.processor.LocalPollingMonitor - Creating local task monitor for executor 'local' > cpus=8; memory=16 GB; capacity=8; pollInterval=100ms; dumpInterval=5m
-Apr-16 14:16:01.467 [main] DEBUG nextflow.processor.TaskDispatcher - Starting monitor: LocalPollingMonitor
-Apr-16 14:16:01.467 [main] DEBUG n.processor.TaskPollingMonitor - >>> barrier register (monitor: local)
-Apr-16 14:16:01.469 [main] DEBUG nextflow.executor.Executor - Invoke register for executor: local
-Apr-16 14:16:01.543 [main] DEBUG nextflow.Session - >>> barrier register (process: splitLetters)
-Apr-16 14:16:01.548 [main] DEBUG nextflow.processor.TaskProcessor - Creating operator > splitLetters -- maxForks: 8
-Apr-16 14:16:01.605 [main] DEBUG nextflow.processor.ProcessFactory - << taskConfig executor: null
-Apr-16 14:16:01.605 [main] DEBUG nextflow.processor.ProcessFactory - >> processorType: 'local'
-Apr-16 14:16:01.605 [main] DEBUG nextflow.executor.Executor - Initializing executor: local
-Apr-16 14:16:01.607 [main] DEBUG nextflow.Session - >>> barrier register (process: convertToUpper)
-Apr-16 14:16:01.607 [main] DEBUG nextflow.processor.TaskProcessor - Creating operator > convertToUpper -- maxForks: 8
-Apr-16 14:16:01.641 [main] DEBUG nextflow.script.ScriptRunner - > Await termination 
-Apr-16 14:16:01.641 [main] DEBUG nextflow.Session - Session await
-Apr-16 14:16:01.740 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
-Apr-16 14:16:01.747 [Task submitter] INFO  nextflow.Session - [66/5422cf] Submitted process > splitLetters
-Apr-16 14:16:01.833 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 1; name: splitLetters; status: COMPLETED; exit: 0; error: -; workDir: /Users/vk6/Google Drive/work/cellgeni/nf-workshop/work/66/5422cf0adc07c4662eaaa04b5c1700]
-Apr-16 14:16:01.880 [Actor Thread 2] DEBUG nextflow.Session - <<< barrier arrive (process: splitLetters)
-Apr-16 14:16:01.900 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
-Apr-16 14:16:01.901 [Task submitter] INFO  nextflow.Session - [f5/56dcd5] Submitted process > convertToUpper (2)
-Apr-16 14:16:01.905 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
-Apr-16 14:16:01.905 [Task submitter] INFO  nextflow.Session - [7b/86f99a] Submitted process > convertToUpper (1)
-Apr-16 14:16:01.979 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 3; name: convertToUpper (2); status: COMPLETED; exit: 0; error: -; workDir: /Users/vk6/Google Drive/work/cellgeni/nf-workshop/work/f5/56dcd57618fe720c4ed4602055f68a]
-Apr-16 14:16:01.984 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 2; name: convertToUpper (1); status: COMPLETED; exit: 0; error: -; workDir: /Users/vk6/Google Drive/work/cellgeni/nf-workshop/work/7b/86f99a5e06fe183daee815b2cf09c7]
-Apr-16 14:16:01.986 [Actor Thread 2] DEBUG nextflow.Session - <<< barrier arrive (process: convertToUpper)
-Apr-16 14:16:01.987 [main] DEBUG nextflow.Session - Session await > all process finished
-Apr-16 14:16:01.988 [Task monitor] DEBUG n.processor.TaskPollingMonitor - <<< barrier arrives (monitor: local)
-Apr-16 14:16:01.988 [main] DEBUG nextflow.Session - Session await > all barriers passed
-Apr-16 14:16:02.001 [main] DEBUG nextflow.trace.StatsObserver - Workflow completed > WorkflowStats[succeedCount=3; failedCount=0; ignoredCount=0; cachedCount=0; succeedDuration=167ms; failedDuration=0ms; cachedDuration=0ms]
-Apr-16 14:16:02.010 [main] DEBUG nextflow.CacheDB - Closing CacheDB done
-Apr-16 14:16:02.027 [main] DEBUG nextflow.script.ScriptRunner - > Execution complete -- Goodbye
+  Process: 47616@mib112002i.internal.sanger.ac.uk [172.30.16.88]
+  CPUs: 8 - Mem: 16 GB (419.8 MB) - Swap: 4 GB (1.3 GB)
+Apr-16 14:44:30.137 [main] DEBUG nextflow.Session - Work-dir: /Users/vk6/Google Drive/work/cellgeni/nf-workshop/work [Mac OS X]
+Apr-16 14:44:30.137 [main] DEBUG nextflow.Session - Script base path does not exist or is not a directory: /Users/vk6/Google Drive/work/cellgeni/nf-workshop/bin
+Apr-16 14:44:30.287 [main] DEBUG nextflow.Session - Session start invoked
+Apr-16 14:44:30.293 [main] DEBUG nextflow.processor.TaskDispatcher - Dispatcher > start
+Apr-16 14:44:30.293 [main] DEBUG nextflow.script.ScriptRunner - > Script parsing
+Apr-16 14:44:30.415 [main] DEBUG nextflow.script.ScriptRunner - > Launching execution
+Apr-16 14:44:30.483 [main] DEBUG nextflow.processor.ProcessFactory - << taskConfig executor: null
+Apr-16 14:44:30.483 [main] DEBUG nextflow.processor.ProcessFactory - >> processorType: 'local'
+Apr-16 14:44:30.489 [main] DEBUG nextflow.executor.Executor - Initializing executor: local
+Apr-16 14:44:30.491 [main] INFO  nextflow.executor.Executor - [warm up] executor > local
+Apr-16 14:44:30.498 [main] DEBUG n.processor.LocalPollingMonitor - Creating local task monitor for executor 'local' > cpus=8; memory=16 GB; capacity=8; pollInterval=100ms; dumpInterval=5m
+Apr-16 14:44:30.502 [main] DEBUG nextflow.processor.TaskDispatcher - Starting monitor: LocalPollingMonitor
+Apr-16 14:44:30.502 [main] DEBUG n.processor.TaskPollingMonitor - >>> barrier register (monitor: local)
+Apr-16 14:44:30.504 [main] DEBUG nextflow.executor.Executor - Invoke register for executor: local
+Apr-16 14:44:30.569 [main] DEBUG nextflow.Session - >>> barrier register (process: splitLetters)
+Apr-16 14:44:30.572 [main] DEBUG nextflow.processor.TaskProcessor - Creating operator > splitLetters -- maxForks: 8
+Apr-16 14:44:30.640 [main] DEBUG nextflow.processor.ProcessFactory - << taskConfig executor: null
+Apr-16 14:44:30.640 [main] DEBUG nextflow.processor.ProcessFactory - >> processorType: 'local'
+Apr-16 14:44:30.641 [main] DEBUG nextflow.executor.Executor - Initializing executor: local
+Apr-16 14:44:30.642 [main] DEBUG nextflow.Session - >>> barrier register (process: convertToUpper)
+Apr-16 14:44:30.643 [main] DEBUG nextflow.processor.TaskProcessor - Creating operator > convertToUpper -- maxForks: 8
+Apr-16 14:44:30.659 [main] DEBUG nextflow.script.ScriptRunner - > Await termination 
+Apr-16 14:44:30.659 [main] DEBUG nextflow.Session - Session await
+Apr-16 14:44:30.823 [Actor Thread 3] INFO  nextflow.processor.TaskProcessor - [66/5422cf] Cached process > splitLetters
+Apr-16 14:44:30.839 [Actor Thread 2] DEBUG nextflow.Session - <<< barrier arrive (process: splitLetters)
+Apr-16 14:44:30.885 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Apr-16 14:44:30.891 [Task submitter] INFO  nextflow.Session - [00/fc01e0] Submitted process > convertToUpper (1)
+Apr-16 14:44:30.896 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Apr-16 14:44:30.896 [Task submitter] INFO  nextflow.Session - [b2/816523] Submitted process > convertToUpper (2)
+Apr-16 14:44:30.994 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 2; name: convertToUpper (1); status: COMPLETED; exit: 0; error: -; workDir: /Users/vk6/Google Drive/work/cellgeni/nf-workshop/work/00/fc01e0b61163f0b5ae98e9003da64f]
+Apr-16 14:44:31.006 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 3; name: convertToUpper (2); status: COMPLETED; exit: 0; error: -; workDir: /Users/vk6/Google Drive/work/cellgeni/nf-workshop/work/b2/816523b54d524c9483b0cce4555f4c]
+Apr-16 14:44:31.009 [Actor Thread 2] DEBUG nextflow.Session - <<< barrier arrive (process: convertToUpper)
+Apr-16 14:44:31.009 [main] DEBUG nextflow.Session - Session await > all process finished
+Apr-16 14:44:31.010 [Task monitor] DEBUG n.processor.TaskPollingMonitor - <<< barrier arrives (monitor: local)
+Apr-16 14:44:31.011 [main] DEBUG nextflow.Session - Session await > all barriers passed
+Apr-16 14:44:31.026 [main] DEBUG nextflow.trace.StatsObserver - Workflow completed > WorkflowStats[succeedCount=2; failedCount=0; ignoredCount=0; cachedCount=1; succeedDuration=0ms; failedDuration=0ms; cachedDuration=35ms]
+Apr-16 14:44:31.039 [main] DEBUG nextflow.CacheDB - Closing CacheDB done
+Apr-16 14:44:31.051 [main] DEBUG nextflow.script.ScriptRunner - > Execution complete -- Goodbye

@@ -36,7 +36,7 @@ HELLO
 WORLD!
 ```
 
-## work directory
+## `work` directory
 ```
 > tree -a work
 work
@@ -75,7 +75,44 @@ work
 6 directories, 25 files
 ```
 
-* `work` directory contains sub-directories where Nextflow executes it’s processes
+* `work` directory contains sub-directories where Nextflow executes its processes
 * The names of the directories are randomly generated
-* splitLetters was executed in the `66` sub-directory
-* convertToUpper was executed in `7b` and `f5` sub-directories
+* `splitLetters` was executed in the `66` sub-directory
+* `convertToUpper` was executed in `7b` and `f5` sub-directories
+* For each process Nextflow generates some system scripts and the outputs
+* The original process command is in .command.sh
+* `.command.run` is the script submitted to the cluster environment
+* `.command.err`, `.command.log`, `.command.out` are the standard outputs
+* `convertToUpper` depends on the output of `splitLetters`, a link has been created (no copying)
+
+## Modify and resume
+Let's modify the script block in the `convertToUpper` process (now will run `rev $x`):
+```
+process convertToUpper {
+    input:
+    file x from letters
+
+    output:
+    stdout result
+
+    script:
+    """
+    rev $x
+    """
+}
+```
+
+and rerun Nextflow with the `-resume` flag:
+```
+> nextflow run hello-world.nf -resume
+N E X T F L O W  ~  version 0.27.4
+Launching `hello-world.nf` [mighty_goldstine] - revision: 0fa0fd8326
+[warm up] executor > local
+[66/5422cf] Cached process > splitLetters
+[00/fc01e0] Submitted process > convertToUpper (1)
+[b2/816523] Submitted process > convertToUpper (2)
+olleH
+!dlrow
+```
+
+Note that the first process `splitLetters` was cached and was not run at all!

@@ -1,2 +1,5 @@
 nextflow
 .nextflow
+work/00
+work/b2
+.nextflow.log*
