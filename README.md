@@ -1,5 +1,8 @@
 # Nextflow workshop
-Nextflow workshop at the Sanger Institute
+Nextflow workshop at the Sanger Institute.
+
+Materials used in this workshop:
+* [Nextflow documentation](https://www.nextflow.io/docs/latest/index.html)
 
 ## Clone the workshop repo and install Nextflow
 ```
@@ -134,3 +137,47 @@ Launching `hello-world.nf` [elated_hamilton] - revision: b0857ec305
 odnu
 m aloH
 ```
+
+## Software
+
+### Local software
+By default, Nextflow can use all the software available in your bash environment. 
+
+### conda environments
+However, if you need some specific software installation that you don't want to be bothered with, we recommend using `conda` environments. To install `conda`, please follow the steps on [this page](https://conda.io/docs/user-guide/install/index.html).
+
+There are [multiple ways](https://conda.io/docs/user-guide/tasks/manage-environments.html) of creating and managing `conda` environments. We recommend using `environment.yml` file. For more details please see [here](https://conda.io/docs/user-guide/tasks/manage-environments.html#creating-an-environment-from-an-environment-yml-file).
+
+Here we will show an example of setting up a conda environment for our [RNAseq pipeline](https://github.com/cellgeni/rnaseq) using the `environment.yml` file:
+```
+name: rnaseq
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - fastqc=0.11.7
+  - bedops=2.4.30
+  - cutadapt=1.15
+  - trim-galore=0.4.5
+  - star=2.5.4a
+  - hisat2=2.1.0
+  - rseqc=2.6.4
+  - picard=2.17.6
+  - samtools=1.7
+  - preseq=2.0.2
+  - subread=1.6.0
+  - stringtie=1.3.3
+  - multiqc=1.4
+```
+
+To create an environment with the all the listed software one needs to run:
+```
+conda env create -f environment.yml
+```
+
+Once the environment is ready it can be activated inside a Nextflow process using these lines:
+```
+beforeScript "set +u; source activate rnaseq"
+afterScript "set +u; source deactivate"
+```
+
