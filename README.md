@@ -185,7 +185,7 @@ afterScript "set +u; source deactivate"
 
 ### Docker images
 
-You conda environments can be further dockerized if needed using:
+You conda environments can be further dockerized if needed using a `Dockerfile`:
 ```
 FROM continuumio/miniconda
 ADD environment.yml
@@ -195,3 +195,4 @@ RUN conda env create -f environment.yml
 You can then add any other softwared you need for your pipeline to the docker image.
 
 ## SC3 clustering Nextflow pipeline
+
