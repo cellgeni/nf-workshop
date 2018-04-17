@@ -33,7 +33,7 @@ HELLO
 
 * The first process is executed once, and the second twice
 * The result string is printed
-* convertToUpper is executed in parallel, so it is possible that you will get the final result printed out in a different order:
+* `convertToUpper` is executed in parallel, so it is possible that you will get the final result printed out in a different order:
 ```
 HELLO
 WORLD!
@@ -228,8 +228,15 @@ Launching `main.nf` [elegant_carson] - revision: d5c6c10c98
 [7a/1bb0d2] Submitted process > merge_results
 ```
 
-The first process was run 3 times (default value), but this number can be controlled by using `-n` argument when executing `main.nf`.
+The first process was run 3 times (default value), but this number can be controlled by using `--n` flag when executing `main.nf`.
 
 __Exercise__ What is the result of the pipeline?
 
 __Exercise__ Explore the newly created folders in the `work` directory.
+
+## Nextflow on the Sanger farm cluster
+
+### Configuration file
+When a pipeline script is launched Nextflow looks for a file named `nextflow.config` in the current directory and in the script base directory (if it is not the same as the current directory). Finally it checks for the file `$HOME/.nextflow/config`.
+
+`nextflow.config` is a configuration file that is used to define parameters required by your computational environment. If you need to run your pipeline on different environments, you can make use of configuration __profile__s. A __profile__ is a set of configuration attributes that can be activated/chosen when launching a pipeline execution by using the `-profile` command line option.
