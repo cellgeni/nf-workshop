@@ -8,6 +8,26 @@ Head of the Cellular Genetics Informatics
 
 Sanger Institute
 
+## Basic concepts
+
+* Nextflow is designed around the idea that the Linux platform is the lingua franca of data science. 
+* Linux provides many simple but powerful command-line and scripting tools that, when chained together, facilitate complex data manipulations
+* Nextflow extends this approach, adding the ability to define complex program interactions and a high-level parallel computational environment based on the dataflow programming model
+
+## Processes and channels
+
+* Nextflow pipeline script is made by joining together many different processes. Each process can be written in any scripting language that can be executed by the Linux platform (Bash, Perl, Ruby, Python, etc.)
+* Processes are executed independently and are isolated from each other, i.e. they do not share a common (writable) state
+* The only way they can communicate is via asynchronous FIFO queues, called channels 
+* Any process can define one or more channels as input and output
+
+## Execution and abstraction
+
+* While a process defines what command or script has to be executed, the executor determines how that script is actually run on the target environment
+* If not otherwise specified, processes are executed on the local computer. The local executor is very useful for pipeline development and test purposes, but for real world computational pipelines an HPC or cloud platform is required
+* Nextflow provides an abstraction between the pipeline's functional logic and the underlying execution environment
+* Thus it is possible to write a pipeline once and to seamlessly run it on your computer, a grid platform, or the cloud, without modifying it
+
 ## Clone the workshop repo and install Nextflow
 ```
 git clone git@github.com:cellgeni/nf-workshop.git
@@ -253,7 +273,7 @@ When a pipeline script is launched Nextflow looks for a file named `nextflow.con
 
 `nextflow.config` is a configuration file that is used to define parameters required by your computational environment. If you need to run your pipeline on different environments, you can make use of configuration __profile__s. A __profile__ is a set of configuration attributes that can be activated/chosen when launching a pipeline execution by using the `-profile` command line option.
 
-__Exercise__ Have a look at our [nextflow.config](nextflow.config) file.
+__Exercise__ Have a look at our [nextflow.config](nextflow.config) file. Did you notice the cloud profile?!
 
 ## Sanger farm settings
 We have tested Nextflow on the Sanger farm and found parameters that are required to be present in the configuration file to be able to run the pipeline successfully:
@@ -311,6 +331,7 @@ JOBID   USER    STAT  QUEUE      FROM_HOST   EXEC_HOST   JOB_NAME   SUBMIT_TIME
 
 ## More resources
 
+* [Nextflow publication](https://www.nature.com/articles/nbt.3820)
 * [More Nextflow presentations](https://speakerdeck.com/pditommaso/)
 * [Nextflow examples](https://github.com/nextflow-io/examples)
 * [Another Nextflow workshop](https://github.com/nextflow-io/hack17-tutorial)
