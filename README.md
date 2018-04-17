@@ -208,6 +208,14 @@ In the `main.nf` we have two processes (`run_sc3` and `merge_results`) and one p
 
 __Exercise__ Have a look at [main.nf](main.nf) and notice how it is different from [hello-world.nf](hello-world.nf).
 
+__Exercise__ Check Nextflow integration with GitHub by changing your directory to some temporary one and running:
+```
+curl -s https://get.nextflow.io | bash
+./nextflow run cellgeni/nf-workshop
+```
+
+Note that the pipeline has automatically been pulled from GitHub.
+
 ### Third-party scripts
 Since `SC3` is an R package, preferably we would like to have an R script with all the `SC3` commands in a separate file. Nextflow allows you to store all third-party scripts in the `bin` folder in the root directory of your project repository. Nextflow will automatically add this folder to the `PATH` environment variable, and the scripts will automatically be accessible in your pipeline without the need to specify an absolute path to invoke them.
 
@@ -240,3 +248,58 @@ __Exercise__ Explore the newly created folders in the `work` directory.
 When a pipeline script is launched Nextflow looks for a file named `nextflow.config` in the current directory and in the script base directory (if it is not the same as the current directory). Finally it checks for the file `$HOME/.nextflow/config`.
 
 `nextflow.config` is a configuration file that is used to define parameters required by your computational environment. If you need to run your pipeline on different environments, you can make use of configuration __profile__s. A __profile__ is a set of configuration attributes that can be activated/chosen when launching a pipeline execution by using the `-profile` command line option.
+
+__Exercise__ Have a look at our [nextflow.config](nextflow.config) file.
+
+### Important parameters
+We have tested Nextflow on the Sanger farm and found parameters that are required to be present in the configuration file to be able to run the pipeline successfully:
+```
+// this is required by bsub on farm3: selected[mem] should = rusage[mem]
+// http://mediawiki.internal.sanger.ac.uk/wiki/index.php/Submitting_large_memory_jobs
+process.clusterOptions = { "-R \"select[mem>${task.memory.toMega()}]\"" }
+// https://www.nextflow.io/docs/latest/executor.html#lsf
+executor.perJobMemLimit = true
+```
+
+The first requirement is the memory limit and second one is giving memory to the job and not to a single core inside the job (in case of multicore jobs).
+
+### How to run Nextflow on the Sanger farm
+
+Here is what we recommend you to do to be able to successfully run Nextflow on the Sanger farm:
+```
+# login to the farm
+ssh -Y farm3-head2
+
+# this will add Nextflow executable to your path (together with other
+# CellGen IT software and R packages, including SC3)
+source /nfs/cellgeni/.cellgenirc
+
+# create a dedicated bash session for your pipeline
+tmux new -s sc3_pipeline
+
+# Java is not permitted on the head nodes, but it is allowed on the 
+# slave nodes, therefore we need to start an interactive job to be 
+# able to run Nextflow
+bsub -Is -q long -R"select[mem>5000] rusage[mem=5000]" -M5000 bash
+
+# (optional)
+# your session in the long queue will be active for 2 days, if your
+# pipeline requires more time to finish, you can use rhweek queue which
+# will be active for 1 week:
+# bsub -Is -q rhweek -R"select[mem>5000] rusage[mem=5000]" -M5000 bash
+```
+
+__Exercise__ Now try to run our `SC3` pipeline on the farm using:
+```
+nextflow run cellgeni/nf-workshop -profile farm
+```
+
+If you open another terminal and look at your jobs using `bjobs`, you will see that Nextflow has started 3 jobs corresponding to the first process in our pipeline running with three different random seeds:
+```
+vk6@farm3-head2:~$ bjobs
+JOBID   USER    STAT  QUEUE      FROM_HOST   EXEC_HOST   JOB_NAME   SUBMIT_TIME
+9525703 vk6     RUN   long       farm3-head2 bc-27-3-04  bash       Apr 17 11:38
+9525942 vk6     RUN   normal     bc-27-3-04  bc-32-1-09  *n_sc3_(2) Apr 17 11:39
+9525949 vk6     RUN   normal     bc-27-3-04  bc-32-1-09  *n_sc3_(3) Apr 17 11:39
+9525953 vk6     RUN   normal     bc-27-3-04  bc-32-1-09  *n_sc3_(1) Apr 17 11:39
+```
