@@ -30,9 +30,11 @@ Sanger Institute
 
 ## Clone the workshop repo and install Nextflow
 ```
-git clone git@github.com:cellgeni/nf-workshop.git
+git clone https://github.com/cellgeni/nf-workshop.git
 cd nf-workshop
 curl -s https://get.nextflow.io | bash
+# use wget if curl is not available
+# wget -qO- https://get.nextflow.io | bash
 ls
 ```
 
