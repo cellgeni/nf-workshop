@@ -1,3 +1,5 @@
+#!/usr/bin/env Rscript
+
 library(SingleCellExperiment)
 library(SC3)
 
@@ -21,5 +23,12 @@ sce <- sce[!duplicated(rowData(sce)$feature_symbol), ]
 isSpike(sce, "ERCC") <- grepl("ERCC", rowData(sce)$feature_symbol)
 
 # run SC3
-sce <- sc3(sce, ks = 6, rand_seed = args[1])
-write.csv(colData(sce)$sc3_6_clusters, file = "clusters.txt", quote = F)
+sce <- sc3(sce, ks = 6, rand_seed = args[1], n_cores = 1)
+
+# write results
+write.csv(
+    colData(sce)$sc3_6_clusters, 
+    file = paste0("clusters_", args[1], ".txt"), 
+    quote = F,
+    row.names = F
+)

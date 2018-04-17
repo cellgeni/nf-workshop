@@ -20,7 +20,7 @@ ls
 
 ## Run the pipeline
 ```
-> nextflow run hello-world.nf
+> ./nextflow run hello-world.nf
 N E X T F L O W  ~  version 0.27.4
 Launching `hello-world.nf` [exotic_bartik] - revision: 361b274147
 [warm up] executor > local
@@ -107,7 +107,7 @@ process convertToUpper {
 
 and rerun Nextflow with the `-resume` flag:
 ```
-> nextflow run hello-world.nf -resume
+> ./nextflow run hello-world.nf -resume
 N E X T F L O W  ~  version 0.27.4
 Launching `hello-world.nf` [mighty_goldstine] - revision: 0fa0fd8326
 [warm up] executor > local
@@ -127,7 +127,7 @@ params.str = 'Hello world!'
 
 We can use it in the command line to redefine the default value:
 ```
-> nextflow run hello-world.nf --str 'Hola mundo'
+> ./nextflow run hello-world.nf --str 'Hola mundo'
 N E X T F L O W  ~  version 0.27.4
 Launching `hello-world.nf` [elated_hamilton] - revision: b0857ec305
 [warm up] executor > local
