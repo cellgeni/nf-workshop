@@ -315,14 +315,6 @@ In the `main.nf` we have two processes (`run_sc3` and `merge_results`) and one p
 
 **Exercise** Have a look at [main.nf](main.nf) and notice how it is different from [hello-world.nf](hello-world.nf).
 
-**Exercise** Check Nextflow integration with GitHub by changing your directory to some temporary one and running:
-
-```
-curl -s https://get.nextflow.io | bash
-./nextflow run cellgeni/nf-workshop
-```
-Note that the pipeline has automatically been pulled from GitHub.
-
 
 ---
 ## Third-party scripts
@@ -352,6 +344,17 @@ The first process was run 3 times (default value), but this number can be contro
 **Exercise** What is the result of the pipeline?
 
 **Exercise** Explore the newly created folders in the `work` directory.
+
+
+---
+## Run SC3
+**Exercise** Check Nextflow integration with GitHub by changing your directory to some temporary one and running:
+
+```
+curl -s https://get.nextflow.io | bash
+./nextflow run cellgeni/nf-workshop
+```
+Note that the pipeline has automatically been pulled from GitHub.
 
 
 ---
