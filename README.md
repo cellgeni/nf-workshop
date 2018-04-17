@@ -1,5 +1,7 @@
 # Nextflow workshop
 
+[https://github.com/cellgeni/nf-workshop](https://github.com/cellgeni/nf-workshop)
+
 Vladimir Kiselev
 
 Head of the Cellular Genetics Informatics
