@@ -21,7 +21,7 @@ ls
 ## Run the pipeline
 ```
 > ./nextflow run hello-world.nf
-N E X T F L O W  ~  version 0.27.4
+N E X T F L O W  ~  version 0.28.0
 Launching `hello-world.nf` [exotic_bartik] - revision: 361b274147
 [warm up] executor > local
 [e7/7d678f] Submitted process > splitLetters
@@ -108,7 +108,7 @@ process convertToUpper {
 and rerun Nextflow with the `-resume` flag:
 ```
 > ./nextflow run hello-world.nf -resume
-N E X T F L O W  ~  version 0.27.4
+N E X T F L O W  ~  version 0.28.0
 Launching `hello-world.nf` [mighty_goldstine] - revision: 0fa0fd8326
 [warm up] executor > local
 [66/5422cf] Cached process > splitLetters
@@ -128,7 +128,7 @@ params.str = 'Hello world!'
 We can use it in the command line to redefine the default value:
 ```
 > ./nextflow run hello-world.nf --str 'Hola mundo'
-N E X T F L O W  ~  version 0.27.4
+N E X T F L O W  ~  version 0.28.0
 Launching `hello-world.nf` [elated_hamilton] - revision: b0857ec305
 [warm up] executor > local
 [b3/924952] Submitted process > splitLetters
@@ -196,3 +196,40 @@ You can then add any other softwared you need for your pipeline to the docker im
 
 ## SC3 clustering Nextflow pipeline
 
+### Introduction
+Now we will create a more real-life example pipeline. We will run [SC3](https://bioconductor.org/packages/release/bioc/html/SC3.html) clustering of a small single-cell RNAseq dataset (which is included in the `SC3` package). `SC3` is a stochastic clustering algorithm and with this pipeline we would like to check its stability. To do that we will run `SC3` multiple times in parallel every time changing an initial random seed. After that we will merge all the results into one matrix, which is useful for further downstream analysis.
+
+### main.nf
+In order to publish your Nextflow pipeline to GitHub (or any other supported platform) and allow other people to use it, you only need to create a GitHub repository containing all your project script and data files.
+
+Nextflow only requires that the main script in your pipeline project to be called `main.nf`. We will use this name for our `SC3` pipeline.
+
+In the `main.nf` we have two processes (`run_sc3` and `merge_results`) and one parameter (`params.n`) which is the number of times we would like to `SC3` with different random seeds.
+
+__Exercise__ Have a look at [main.nf](main.nf) and notice how it is different from [hello-world.nf](hello-world.nf).
+
+### Third-party scripts
+Since `SC3` is an R package, preferably we would like to have an R script with all the `SC3` commands in a separate file. Nextflow allows you to store all third-party scripts in the `bin` folder in the root directory of your project repository. Nextflow will automatically add this folder to the `PATH` environment variable, and the scripts will automatically be accessible in your pipeline without the need to specify an absolute path to invoke them.
+
+> Note that you have to grant these scripts the execute permission (`chmod +x bin/*`) and add a shebang to all of your third-party scripts. In the case of `R` scripts we will add `#!/usr/bin/env Rscript` shebang. The scripts then should be called __just by their name__ in the process scripts.
+
+In our pipeline we have to `R` scripts in the `bin` folder (`sc3.R` and `merge.R`) corresponding to the two pipeline processes.
+
+### Run `SC3`
+Now, let's run our `SC3` pipeline:
+```
+> ./nextflow run main.nf
+N E X T F L O W  ~  version 0.28.0
+Launching `main.nf` [elegant_carson] - revision: d5c6c10c98
+[warm up] executor > local
+[0a/9ccd50] Submitted process > run_sc3 (3)
+[b2/a0bbd7] Submitted process > run_sc3 (1)
+[9d/9a91db] Submitted process > run_sc3 (2)
+[7a/1bb0d2] Submitted process > merge_results
+```
+
+The first process was run 3 times (default value), but this number can be controlled by using `-n` argument when executing `main.nf`.
+
+__Exercise__ What is the result of the pipeline?
+
+__Exercise__ Explore the newly created folders in the `work` directory.
